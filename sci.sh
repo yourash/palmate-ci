@@ -1,6 +1,0 @@
-#!/bin/sh
-
-EXECUTOR_HOST='0.0.0.0'
-EXECUTOR_PORT='9987'
-
-executor/service.py $EXECUTOR_HOST $EXECUTOR_PORT
