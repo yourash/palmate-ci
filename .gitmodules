@@ -1,0 +1,3 @@
+[submodule "agent/job/vaggapy"]
+	path = agent/job/vaggapy
+	url = https://github.com/RostakaGmfun/vaggapy.git
