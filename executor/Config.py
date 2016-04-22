@@ -1,6 +1,5 @@
 import os, sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import common.Project as Project
+import ..common.Project as Project
 import hjson
 
 def getProjects():
