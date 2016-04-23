@@ -11,3 +11,11 @@ class NodeConfig:
         self.port = port
         self.maxJobs = maxJobs
 
+    def serialize(self):
+        return {
+            'name':self.name,
+            'host':self.host,
+            'port':self.port,
+            'maxJobs':self.maxJobs
+        }
+

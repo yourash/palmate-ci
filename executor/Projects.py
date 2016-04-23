@@ -1,3 +1,7 @@
+from flask_restful import Resource
 
-class ProjectList:
+class ProjectList(Resource):
+    pass
+
+class Project(Resource):
     pass
