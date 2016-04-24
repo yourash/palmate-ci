@@ -1,8 +1,8 @@
 
-class NodeConfig:
-    """Represent configuration for node.
+class LeafConfig:
+    """Represent configuration for leaf.
 
-    Intended to be used by both Executor and Node service
+    Intended to be used by both Executor and Leaf service
     """
 
     def __init__(self, name, host, port, maxJobs):

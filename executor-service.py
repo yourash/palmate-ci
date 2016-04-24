@@ -4,7 +4,7 @@ import sys
 from flask import Flask
 from flask_restful import Api
 
-import executor.Nodes as Nodes
+import executor.Leaves as Leaves
 import executor.Projects as Projects
 import executor.Builds as Builds
 
@@ -15,12 +15,12 @@ if __name__ == "__main__":
         print("Usage: %s host port" % sys.argv[0])
         sys.exit(0)
 
-    Nodes.nodeStorage.addNode({"host":"123456", "port":"12345"})
+    Leaves.storage.addLeaf({"host":"123456", "port":"12345"})
 
     executorApi = Api(executorService)
 
-    executorApi.add_resource(Nodes.NodeList, '/nodes/')
-    executorApi.add_resource(Nodes.Node, '/nodes/<int:nodeId>')
+    executorApi.add_resource(Leaves.LeafIndex, '/leaves/')
+    executorApi.add_resource(Leaves.LeafResource, '/leaves/<int:leafId>')
 
     executorApi.add_resource(Projects.ProjectIndex, '/projects')
     executorApi.add_resource(Projects.ProjectResource, '/projects/<int:projectId>')
