@@ -50,7 +50,7 @@ storage = LeafStorage([])
 
 class LeafIndex(Resource):
     def get(self):
-        return storage.getLeafIds()
+        return {"leaves":storage.getLeafIds()}
 
 class LeafResource(Resource):
     def get(self, leafId):
