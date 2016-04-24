@@ -22,8 +22,8 @@ if __name__ == "__main__":
     executorApi.add_resource(Nodes.NodeList, '/nodes/')
     executorApi.add_resource(Nodes.Node, '/nodes/<int:nodeId>')
 
-    executorApi.add_resource(Projects.ProjectList, '/projects')
-    executorApi.add_resource(Projects.Project, '/projects/<int:projectId>')
+    executorApi.add_resource(Projects.ProjectIndex, '/projects')
+    executorApi.add_resource(Projects.ProjectResource, '/projects/<int:projectId>')
 
     executorApi.add_resource(Builds.Build, '/builds/<int:projectId>')
     executorService.run(host=sys.argv[1], port=sys.argv[2])
