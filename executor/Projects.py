@@ -24,14 +24,32 @@ class ProjectStorage:
     def getProjectIds(self):
         return self.__projects.keys()
 
+    def getProject(self, projectId):
+        return self.__projects.get(projectId)
+
+    def checkProject(self, project):
+        for pId, p in self.__projects.items():
+            if p.config['name'] == project.config['name']:
+                print("Error: can't add two projects with identical names %s" % p.config.name)
+                return False
+        return True
+
 storage = ProjectStorage([])
 
 class ProjectIndex(Resource):
     def get(self):
-        return {}
+        projects = list()
+        for id in storage.getProjectIds():
+            project = storage.getProject(id)
+            print(project.config['name'])
+            projects.append({project.config['name']: id})
+        return {"projects":projects}
 
 class ProjectResource(Resource):
     def get(self, projectId):
-        return {}
-
+        project = storage.getProject(projectId)
+        if project is None:
+            return {"error": "Project with id %d does not exist"%projectId}, 404
+        else:
+            return project.config
 
