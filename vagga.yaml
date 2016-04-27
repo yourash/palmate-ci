@@ -20,8 +20,13 @@ commands:
             mongodb: !Command
                 container: mongo-host
                 tags: [database]
-                run: sudo service mongodb start
+                run: |
+                    mkdir -p /tmp/data/db
+                    mongod --dbpath /tmp/data/db
             executor: !Command
                 container: executor-host
                 tags: [service]
-                run: ./deploy-executor.sh
+                run: |
+                    mkdir -p /tmp/palmate
+                    /work/deploy-executor.sh /tmp/palmate
+

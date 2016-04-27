@@ -14,11 +14,15 @@ from common.Leaf import LeafConfig
 def logException(sender, exception, **extra):
     print('Exception occured: %s' % exception)
 
-if len(sys.argv) != 3:
+if len(sys.argv) < 3:
     print("Usage: %s host port" % sys.argv[0])
     sys.exit(0)
 
-Config.checkDirs()
+if len(sys.argv) == 4:
+    Config.__configBasePath = sys.argv[3]
+
+if not Config.checkDirs():
+    sys.exit(1)
 
 Builds.storage = Builds.BuildDAO(None)
 
