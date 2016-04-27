@@ -20,6 +20,8 @@ if len(sys.argv) != 3:
 
 Config.checkDirs()
 
+Builds.storage = Builds.BuildDAO(None)
+
 for project in Config.getProjects():
     Projects.storage.addProject(ProjectConfig(project))
 
@@ -28,7 +30,7 @@ for leaf in Config.getLeaves():
 
 
 executorService = Flask("Executor")
-#executorService.config['BUNDLE_ERRORS'] = True
+executorService.config['BUNDLE_ERRORS'] = True
 got_request_exception.connect(logException, executorService)
 
 executorApi = Api(executorService)

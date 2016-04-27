@@ -1,4 +1,6 @@
 flask
+pyyaml
 flask_restful
 blinker
+pymongo
 

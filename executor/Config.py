@@ -5,7 +5,8 @@ __configDir = os.path.expanduser('~')+'/.palmate/'
 __configExtension = '.yml'
 __configPaths = [
             __configDir+'projects/',
-            __configDir+'leaves/'
+            __configDir+'leaves/',
+            __configDir+'builds/'
         ]
 
 def checkDirs():

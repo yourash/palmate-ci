@@ -1,4 +1,5 @@
 from flask_restful import Resource, reqparse
+import pymongo as mongo
 
 class BuildDTO:
     def __init__(self, timestamp, projectId, leafId, artifactId):
@@ -15,9 +16,11 @@ class BuildDTO:
         }
 
 class BuildDAO:
-    def __init__(self):
+    # TODO: implement BuildDAO with sqlite backend
+    def __init__(self, mongoBuildsDb):
         self.__builds = dict()
         self.__currentId = 1
+        self.__db = mongoBuildsDb
 
     def addBuild(self, build):
         if self.checkBuild(build):
@@ -27,12 +30,12 @@ class BuildDAO:
         return self.__builds.keys()
 
     def getBuild(self, buildId):
-        pass
+        return self.__builds.get(buildId)
 
     def checkBuild(self, build):
         return True
 
-storage = BuildDAO()
+storage = None
 
 class BuildIndex(Resource):
     def __init__(self):
@@ -51,4 +54,10 @@ class BuildRecentIndex(Resource):
     pass
 
 class BuildResource(Resource):
-    pass
+    def get(self, buildId):
+        build = storage.getBuild(buildId)
+        if build is not None:
+            return build.serialize()
+        else:
+            return {"error":"Build with id %d does not exist" %buildId}, 404
+

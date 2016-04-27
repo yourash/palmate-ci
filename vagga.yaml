@@ -1,0 +1,27 @@
+containers:
+    executor-host:
+        setup:
+            - !Ubuntu trusty
+            - !Install [python3]
+            - !PipConfig dependencies: true
+            - !Py3Requirements "executor/requirements.txt"
+    mongo-host:
+        setup:
+            - !Ubuntu trusty
+            - !Sh sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+            - !Sh echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+            - !Sh sudo apt-get update
+            - !Sh sudo apt-get install mongodb-org -y
+
+commands:
+    deploy-executor: !Supervise
+        description: Deploy Executor service with mongodb backend
+        children:
+            mongodb: !Command
+                container: mongo-host
+                tags: [database]
+                run: sudo service mongodb start
+            executor: !Command
+                container: executor-host
+                tags: [service]
+                run: ./deploy-executor.sh
