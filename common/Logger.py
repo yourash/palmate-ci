@@ -11,7 +11,7 @@ class Logger:
         self.logger = logging.getLogger()
         self.handler = colorlog.StreamHandler()
         self.handler.setFormatter(colorlog.ColoredFormatter(
-                '%(log_color)s%(levelname)s:%(name)s:%(message)s%(reset)s',
+                '%(asctime)s %(log_color)s%(levelname)s:%(name)s:%(message)s%(reset)s',
                 log_colors={
                     'INFO': 'green',
                     'WARNING': 'yellow',
