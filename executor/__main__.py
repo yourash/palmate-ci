@@ -10,7 +10,7 @@ import executor.Config as Config
 
 from common.Project import ProjectConfig
 from common.Leaf import LeafConfig
-
+from common import Logger
 
 # TODO(yourash): implement colored mitli-level logging
 def logException(sender, exception, **extra):
@@ -18,6 +18,7 @@ def logException(sender, exception, **extra):
 
 class ExecutorApp:
     def __init__(self, host, port):
+        self.logger = Logger.Logger('/var/palmate-executor.log')
         self.loadConfigs()
         self.host = host
         self.port = port
@@ -60,11 +61,11 @@ class ExecutorApp:
 
     def connectDb(self):
         # TODO(yourash): implement colored mitli-level logging
-        print('Connecting to mongodb at %s:%d' % (self.mongoHost, self.mongoPort))
+        self.logger.info('Connecting to mongodb at %s:%d' % (self.mongoHost, self.mongoPort))
         self.mongoClient = MongoClient(self.mongoHost, self.mongoPort)
         serverInfo = self.mongoClient.server_info()
-        print('Connected, server info:')
-        print(serverInfo)
+        self.logger.info('Connected, server info:')
+        self.logger.info(serverInfo)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
