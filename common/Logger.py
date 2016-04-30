@@ -1,17 +1,16 @@
 import logging
 import colorlog
-import sys
 
 class Logger:
     def __init__(self, fname, level='INFO'):
         if fname:
-        		try:
-        			self.fname = open(fname, 'w')
-        		except IOError:
-        			print('cannot open',fname)
-        			self.fname = None
-        		else:
-        			self.fname = None
+        	try:
+        		self.fname = open(fname, 'w')
+        	except IOError:
+        		print('[ERROR] Failed to open %s for writing',fname)
+        		self.fname = None
+        	else:
+        		self.fname = None
 
         self.logger = logging.getLogger()
         self.handler = colorlog.StreamHandler()
