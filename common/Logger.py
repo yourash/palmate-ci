@@ -5,11 +5,10 @@ import sys
 class Logger:
     def __init__(self, fname, level='INFO'):
         if fname:
-        	for arg in sys.argv[1:]:
         		try:
         			self.fname = open(fname, 'w')
         		except IOError:
-        			print('cannot open', arg)
+        			print('cannot open',fname)
         			self.fname = None
         		else:
         			self.fname = None
